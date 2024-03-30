@@ -9,19 +9,30 @@
         <% end %>
       </ul>
     </div>
+
+    <% else %>
+      <div>
+        <%= form.label :user_id, 'Student', style: "display: block" %>
+        <%= form.collection_select(:user_id, @students, :id, :name) %>
+      </div>
+
+      <div>
+        <%= form.label :teacher_id, 'Teacher', style: "display: block" %>
+        <%= form.collection_select(:teacher_id, @teachers, :id, :name) %>
+    </div>
+
+    <div>
+      <%= form.label :program_id, 'Program', style: "display: block" %>
+      <%= form.collection_select(:program_id, @programs, :id, :name) %>
+    </div>
+
+    <div>
+      <%= form.check_box :favorite %>
+      <%= form.label :favorite, 'Favorite Teacher' %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
   <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.number_field :teacher_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

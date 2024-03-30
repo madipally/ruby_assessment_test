@@ -13,6 +13,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    @programs = Program.all
+    @students = User.where(kind: "student")
+    @teachers = User.where(kind: "teacher")
   end
 
   # GET /enrollments/1/edit
@@ -22,7 +25,6 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments or /enrollments.json
   def create
     @enrollment = Enrollment.new(enrollment_params)
-
     respond_to do |format|
       if @enrollment.save
         format.html { redirect_to enrollment_url(@enrollment), notice: "Enrollment was successfully created." }
@@ -65,6 +67,6 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def enrollment_params
-      params.require(:enrollment).permit(:user_id, :teacher_id)
+      params.require(:enrollment).permit(:user_id, :teacher_id, :program_id, :favorite)
     end
 end
